@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#100e16">
+<title>TRU SKY</title>
+<style>
+:root{--bg:#100e16;--ink:#f0eaf8;--dim:#b0a4c4;--line:#2e2840;--star:#d7c4f0;--card:#1a1624}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 Georgia,serif}
+button,input{font:inherit;color:inherit}
+header{padding:16px 16px 6px} h1{font-size:22px;letter-spacing:.14em;margin:0;font-weight:normal} h1 span{color:var(--star)}
+.sub{color:var(--dim);font-size:13px}
+.bar{display:flex;gap:8px;padding:8px 16px} input{flex:1;background:#0c0a12;border:1px solid var(--line);border-radius:8px;padding:10px}
+button{background:var(--star);color:#16121c;border:0;border-radius:8px;padding:10px 12px;font-weight:bold}
+main{padding:0 16px 28px} .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0 0 10px}
+.k{color:var(--star);font-size:12px;letter-spacing:.12em} .big{font-size:22px;margin:4px 0} .src{color:var(--dim);font-size:12px;margin-top:6px}
+</style>
+</head>
+<body>
+<header><h1>TRU <span>SKY</span></h1><p class="sub">What does not move with the calendar. No planet positions. Those change.</p></header>
+<div class="bar"><input id="q" placeholder="moon, polaris, phase…" enterkeyhint="search"><button id="send">Send</button></div>
+<main id="out"></main>
+<script>
+const C=[
+{t:"Polaris",d:"Outer two stars of the Big Dipper's cup point to the next bright star, about five times the gap between them. That is Polaris. Face it and you face north. Its height above the horizon, in degrees, is about your latitude. Gulf Coast is near 30 degrees."},
+{t:"Moon phase",d:"New: dark, between earth and sun. Waxing crescent: a sliver on the right, growing. First quarter: right half lit. Waxing gibbous: more than half, still growing. Full: opposite the sun, up all night. Then waning gibbous, last quarter (left half), waning crescent. The lit side is the side toward the sun."},
+{t:"Moon and time",d:"A full moon rises near sunset and sets near sunrise. A new moon is up with the sun and useless at night. This is geometry, not an almanac hour."},
+{t:"Star or planet",d:"Stars twinkle more. Planets usually shine steadier, because they are disks, not points. That rule fails in bad air. This card will not name which planet is up tonight."},
+{t:"Orion's belt",d:"Three bright stars in a short even line. They point roughly toward Sirius, the brightest night star, down and left of the belt as seen from northern mid-latitudes in winter. Orion is a winter figure on the Gulf."},
+{t:"Gap",d:"Southern Cross, meteor showers by date, and sunrise tables are not packed. Mark holds the daytime shadow stick."}
+];
+function esc(s){return String(s).replace(/[&<>]/g,c=>({"&":"&","<":"<",">":">"}[c]));}
+function card(x){return `<article class="card"><div class="k">SKY</div><div class="big">${esc(x.t)}</div><div>${esc(x.d)}</div><div class="src">Geometry and named figures only. No ephemeris.</div></article>`;}
+function show(list){document.getElementById("out").innerHTML=list.map(card).join("");}
+function search(q){
+  q=(q||"").trim().toLowerCase();
+  if(!q){show(C);return;}
+  const hits=C.filter(x=>(x.t+" "+x.d).toLowerCase().includes(q));
+  document.getElementById("out").innerHTML=hits.length?hits.map(card).join(""):`<article class="card"><div class="k">GAP</div><div class="big">Not packed</div><div>If it changes by date, it is not on this card.</div></article>`;
+}
+document.getElementById("send").onclick=()=>search(document.getElementById("q").value);
+document.getElementById("q").onkeydown=e=>{if(e.key==="Enter") search(e.target.value);};
+show(C);
+</script>
+</body>
+</html>
