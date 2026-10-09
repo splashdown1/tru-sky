@@ -9,7 +9,7 @@
 :root{--bg:#100e16;--ink:#f0eaf8;--dim:#b0a4c4;--line:#2e2840;--star:#d7c4f0;--card:#1a1624}
 *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 Georgia,serif}
 button,input{font:inherit;color:inherit}
-header{padding:16px 16px 6px} h1{font-size:22px;letter-spacing:.14em;margin:0;font-weight:normal} h1 span{color:var(--star)}
+header{padding:16px 16px 6px} .start{display:inline-block;color:var(--star);font:12px/1.4 system-ui,sans-serif;margin-bottom:10px;text-decoration:none}.start:focus-visible{outline:2px solid var(--star);outline-offset:3px} h1{font-size:22px;letter-spacing:.14em;margin:0;font-weight:normal} h1 span{color:var(--star)}
 .sub{color:var(--dim);font-size:13px}
 .bar{display:flex;gap:8px;padding:8px 16px} input{flex:1;background:#0c0a12;border:1px solid var(--line);border-radius:8px;padding:10px}
 button{background:var(--star);color:#16121c;border:0;border-radius:8px;padding:10px 12px;font-weight:bold}
@@ -18,7 +18,7 @@ main{padding:0 16px 28px} .card{background:var(--card);border:1px solid var(--li
 </style>
 </head>
 <body>
-<header><h1>TRU <span>SKY</span></h1><p class="sub">What does not move with the calendar. No planet positions. Those change.</p></header>
+<header><a class="start" href="https://splashdown1.github.io/tru-shelf/portal/">← Start at TRU Portal</a><h1>TRU <span>SKY</span></h1><p class="sub">What does not move with the calendar. No planet positions. Those change.</p></header>
 <div class="bar"><input id="q" placeholder="moon, polaris, phase…" enterkeyhint="search"><button id="send">Send</button></div>
 <main id="out"></main>
 <script>
